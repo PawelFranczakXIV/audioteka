@@ -50,6 +50,22 @@ class ProductRepository implements ProductProvider, ProductService
         return $product;
     }
 
+    public function edit(\App\Entity\Product $product, ?string $name, ?int $price): \App\Entity\Product
+    {
+        if ($name !== null) {
+            $product->setName($name);
+        }
+
+        if ($price !== null) {
+            $product->setPriceAmount($price);
+        }
+
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+
+        return $product;
+    }
+
     public function remove(string $id): void
     {
         $product = $this->repository->find($id);

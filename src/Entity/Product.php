@@ -31,6 +31,16 @@ class Product implements \App\Service\Catalog\Product
         $this->createdAt = $createdAt ?: new DateTime();
     }
 
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function setPriceAmount(string $priceAmount): void
+    {
+        $this->priceAmount = $priceAmount;
+    }
+
     public function getId(): string
     {
         return $this->id->toString();
