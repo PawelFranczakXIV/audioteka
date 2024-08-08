@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Service\Catalog\Product;
 use App\Service\Catalog\ProductProvider;
 use App\Service\Catalog\ProductService;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Ramsey\Uuid\Uuid;
@@ -21,6 +22,7 @@ class ProductRepository implements ProductProvider, ProductService
     public function getProducts(int $page = 0, int $count = 3): iterable
     {
         return $this->repository->createQueryBuilder('p')
+            ->orderBy('p.createdAt', Criteria::DESC)
             ->setMaxResults($count)
             ->setFirstResult($page * $count)
             ->getQuery()
