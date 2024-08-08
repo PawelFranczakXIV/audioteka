@@ -73,8 +73,7 @@ class Cart implements \App\Service\Cart\Cart
     public function addProduct(\App\Entity\Product $product): void
     {
         foreach ($this->cartItems as $item) {
-
-            if ($item->getProduct() == $product) {
+            if ($item->getProduct()->getId() == $product->getId()) {
                 $item->increaseQuantity();
                 return;
             }
