@@ -84,9 +84,12 @@ class Cart implements \App\Service\Cart\Cart
     public function removeProduct(\App\Entity\Product $product): void
     {
         foreach ($this->cartItems as $item) {
-            if ($item->getProduct() === $product) {
-                $this->cartItems->removeElement($item);
-                return;
+            if ($item->getProduct()->getId() == $product->getId()) {
+                if ($item->getQuantity() > 1) {
+                    $item->decreaseQuantity();
+                } else {
+                    $this->cartItems->removeElement($item);
+                }
             }
         }
     }
