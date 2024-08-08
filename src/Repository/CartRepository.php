@@ -17,7 +17,7 @@ class CartRepository implements CartService
         $cart = $this->entityManager->find(\App\Entity\Cart::class, $cartId);
         $product = $this->entityManager->find(Product::class, $productId);
 
-        if ($cart && $product && !$cart->hasProduct($product)) {
+        if ($cart && $product) {
             $cart->addProduct($product);
             $this->entityManager->persist($cart);
             $this->entityManager->flush();
